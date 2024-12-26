@@ -1,0 +1,149 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: 240 5.9% 10%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 240 5.9% 10%;
+    --radius: 1rem;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --background: 240 10% 3.9%;
+      --foreground: 0 0% 98%;
+      --card: 240 10% 3.9%;
+      --card-foreground: 0 0% 98%;
+      --popover: 240 10% 3.9%;
+      --popover-foreground: 0 0% 98%;
+      --primary: 0 0% 98%;
+      --primary-foreground: 240 5.9% 10%;
+      --secondary: 240 3.7% 15.9%;
+      --secondary-foreground: 0 0% 98%;
+      --muted: 240 3.7% 15.9%;
+      --muted-foreground: 240 5% 64.9%;
+      --accent: 240 3.7% 15.9%;
+      --accent-foreground: 0 0% 98%;
+      --destructive: 0 62.8% 30.6%;
+      --destructive-foreground: 0 0% 98%;
+      --border: 240 3.7% 15.9%;
+      --input: 240 3.7% 15.9%;
+      --ring: 240 4.9% 83.9%;
+      --chart-1: 220 70% 50%;
+      --chart-2: 160 60% 45%;
+      --chart-3: 30 80% 55%;
+      --chart-4: 280 65% 60%;
+      --chart-5: 340 75% 55%;
+    }
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply font-sans antialiased bg-background text-foreground text-base;
+  }
+}
+
+#app {
+  @apply h-screen grid place-content-center;
+}
+
+.blocks_card,
+.quote_card,
+.quotes_skeleton {
+  @apply bg-secondary/50 text-secondary-foreground rounded-lg;
+}
+
+.blocks_container {
+  @apply w-full grid grid-cols-[repeat(12,minmax(0,1fr))] grid-rows-6 p-4;
+}
+
+.blocks_container .block {
+  @apply w-full h-full flex items-center justify-center;
+}
+.blocks_container .block::before {
+  @apply content-[''] bg-foreground rounded-full size-1;
+}
+
+.blocks_container .block.passed::before {
+  @apply opacity-50;
+}
+.blocks_container .block.current::before {
+  @apply scale-150;
+  @apply shadow-[0_0_10px_2px_hsla(var(--foreground)/0.5)];
+}
+.blocks_container .block.ahead::before {
+  @apply bg-muted;
+}
+
+.quotes_skeleton {
+  @apply h-40 mt-4 animate-pulse;
+}
+.quotes_skeleton.hide {
+  @apply hidden;
+}
+
+.quotes {
+  @apply mt-4 max-w-full relative hidden;
+}
+.quotes.show {
+  @apply block;
+}
+
+.quote_card {
+  @apply p-4 w-full hidden;
+}
+.quote_card.show {
+  @apply p-4 w-full block;
+}
+
+.quote_card_body {
+  @apply min-h-20;
+}
+
+.quote_card_footer {
+  @apply pt-4 flex items-center justify-between;
+}
+
+.quote_card_footer .quote_author {
+  @apply text-primary/50 text-sm;
+}
+.quote_card_footer .quote_author > span {
+  @apply text-primary;
+}
+
+.quote_footer_controls {
+  @apply flex items-center gap-2;
+}
+.quote_footer_controls button {
+  @apply bg-secondary size-8 grid place-content-center rounded-full;
+}
+.quote_footer_controls svg {
+  @apply size-4;
+}
